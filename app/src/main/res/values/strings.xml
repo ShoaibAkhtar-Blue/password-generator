@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Password Generator</string>
+    <string name="password_length">Password Length</string>
+    <string name="hint_password_length">Enter Password Length</string>
+    <string name="textView_include_sc">Special Characters</string>
+    <string name="hint_password">Your Password</string>
+    <string name="button_generate">Generate</string>
+    <string name="button_copy">Copy</string>
+    <string name="textView_password_strength">Password Strength</string>
+    <string name="weak_password">Weak</string>
+    <string name="medium_password">Medium</string>
+    <string name="strong_password">Strong</string>
+    <string name="button_save">Save</string>
+    <string name="action_manage_passwords">Manage Passwords</string>
+    <string name="pin">PIN</string>
+    <string name="hint_pin">Enter 6 digit PIN</string>
+    <string name="confirm_pin">Confirm PIN</string>
+    <string name="button_login">Login</string>
+    <string name="button_create_pin">Create PIN</string>
+    <string name="preference_file_pin">Saved PIN</string>
+    <string name="textView_account_id">Account ID</string>
+    <string name="hint_account_id">Enter Account ID</string>
+    <string name="textView_account_password">Password</string>
+    <string name="hint_account_password">Enter Account Password</string>
+    <string name="intent_extra_password">Password</string>
+    <string name="empty_list_msg">You did not save any password</string>
+    <string name="error_duplicate_account_id">Account ID already exists</string>
+    <string name="warning_delete_account_info">Do you want to delete account information?</string>
+    <string name="button_change_pin">Change PIN</string>
+    <string name="action_change_pin">Change PIN</string>
+</resources>

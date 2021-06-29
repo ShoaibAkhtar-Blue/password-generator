@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_size">110dp</dimen>
+    <dimen name="button_create_pin_size">120dp</dimen>
+    <dimen name="editText_password_width">200dp</dimen>
+    <dimen name="imageView_empty_list_size">150dp</dimen>
+</resources>

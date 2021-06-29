@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_a_id"
+        android:text="@string/textView_account_id" />
+
+    <EditText
+        android:layout_width="@dimen/editText_password_width"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_a_password"
+        android:layout_below="@id/textView_a_id"
+        android:enabled="false"
+        android:background="@android:color/transparent"
+        android:inputType="textPassword"
+        android:text="@string/textView_account_password"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_show_password"
+        android:layout_toEndOf="@id/editText_a_password"
+        android:layout_alignBottom="@id/editText_a_password"
+        android:src="@drawable/ic_action_show_password" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_del_account"
+        android:layout_toEndOf="@id/imageView_show_password"
+        android:layout_alignBottom="@id/imageView_show_password"
+        android:src="@drawable/ic_action_delete" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_copy_password"
+        android:layout_toEndOf="@id/imageView_del_account"
+        android:layout_alignBottom="@id/imageView_del_account"
+        android:src="@drawable/ic_action_copy_password" />
+
+</RelativeLayout>
