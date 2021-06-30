@@ -11,6 +11,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +25,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import blue.project.passwordgenerator.data.PasswordsContract;
 
 public class SavedPasswordsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    private final String LOG_TAG = SavedPasswordsActivity.class.getName();
+
     private ListView passwordsListView;
     private FloatingActionButton addNewAccountFAB;
     private PasswordCursorAdapter cursorAdapter;
@@ -61,10 +64,10 @@ public class SavedPasswordsActivity extends AppCompatActivity implements LoaderM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_passwords);
 
-        // Setting title of this activity
+        // Set title of this activity
         this.setTitle("Saved Passwords");
 
-        // Enabling Home button
+        // Enable Home button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cursorAdapter = new PasswordCursorAdapter(this, null);
@@ -92,6 +95,8 @@ public class SavedPasswordsActivity extends AppCompatActivity implements LoaderM
              */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.e(LOG_TAG, "list item is clicked!");
+
                 Uri uri = ContentUris.withAppendedId(PasswordsContract.PasswordsEntry.CONTENT_URI, l);
                 Intent intent = new Intent(SavedPasswordsActivity.this, EditorActivity.class);
                 intent.setData(uri);
@@ -127,9 +132,17 @@ public class SavedPasswordsActivity extends AppCompatActivity implements LoaderM
             case android.R.id.home:
                 // Redirecting user to Main Activity
                 intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
