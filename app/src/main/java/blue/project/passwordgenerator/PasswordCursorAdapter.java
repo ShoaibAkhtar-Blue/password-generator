@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -39,19 +40,22 @@ public class PasswordCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+        // Find references of views in the layout
         TextView accountId = view.findViewById(R.id.textView_a_id);
         EditText accountPw = view.findViewById(R.id.editText_a_password);
         ImageView showPasswordImageView = view.findViewById(R.id.imageView_show_password);
         ImageView delAccountImageView = view.findViewById(R.id.imageView_del_account);
         ImageView copyPasswordImageView = view.findViewById(R.id.imageView_copy_password);
+        ImageView editAccountInfoImageView = view.findViewById(R.id.imageView_edit_ac_info);
         RelativeLayout parentLayout = view.findViewById(R.id.layout_parent);
 
-        // Getting data from cursor
+        // Get data from cursor
         String aId = cursor.getString(cursor.getColumnIndex(PasswordsContract.PasswordsEntry.COLUMN_ACCOUNT_ID));
         String aPw = cursor.getString(cursor.getColumnIndex(PasswordsContract.PasswordsEntry.COLUMN_PASSWORD));
 
+        // Set onClickListener on Hide/Show password ImageView
         showPasswordImageView.setOnClickListener(view1 -> {
-            // Hiding/Showing password
+            // Hide/Show password
             if (!isPasswordVisible) {
                 accountPw.setTransformationMethod(HideReturnsTransformationMethod.getInstance());   // Showing password
                 showPasswordImageView.setImageResource(R.drawable.ic_action_hide_password);
@@ -63,9 +67,10 @@ public class PasswordCursorAdapter extends CursorAdapter {
             }
         });
 
-        // Getting id of the account
+        // Get id of the account
         int id = cursor.getInt(cursor.getColumnIndex(PasswordsContract.PasswordsEntry.COLUMN_ID));
 
+        // Set onClickListener on del account ImageView
         delAccountImageView.setOnClickListener(view12 -> {
             try {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -86,16 +91,16 @@ public class PasswordCursorAdapter extends CursorAdapter {
             }
         });
 
-        // Setting onClickListener on copy password ImageView
+        // Set onClickListener on copy password ImageView
         copyPasswordImageView.setOnClickListener(view13 -> {
             try {
-                // Getting Clipboard service
+                // Get Clipboard service
                 ClipboardManager clipboard = (ClipboardManager) context.getSystemService(context.CLIPBOARD_SERVICE);
 
-                // Making clip of the data
+                // Make clip of the data
                 ClipData clip = ClipData.newPlainText("password", aPw);
 
-                // Clipping data to clipboard
+                // Clip data to clipboard
                 clipboard.setPrimaryClip(clip);
 
                 Toast.makeText(context, "Password is copied on Clipboard", Toast.LENGTH_SHORT).show();
@@ -104,7 +109,15 @@ public class PasswordCursorAdapter extends CursorAdapter {
             }
         });
 
-        // Setting data to views
+        // Set onClickListener on edit account info ImageView
+        editAccountInfoImageView.setOnClickListener(view14 -> {
+            Uri uri = ContentUris.withAppendedId(PasswordsContract.PasswordsEntry.CONTENT_URI, id);
+            Intent intent = new Intent(context, EditorActivity.class);
+            intent.setData(uri);
+            context.startActivity(intent);
+        });
+
+        // Set data to views
         accountId.setText(aId);
         accountPw.setText(aPw);
     }

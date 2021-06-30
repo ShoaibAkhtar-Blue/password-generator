@@ -45,4 +45,12 @@
         android:layout_alignBottom="@id/imageView_del_account"
         android:src="@drawable/ic_action_copy_password" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_edit_ac_info"
+        android:layout_toEndOf="@id/imageView_copy_password"
+        android:layout_alignBottom="@id/imageView_copy_password"
+        android:src="@drawable/ic_action_edit_ac_info" />
+
 </RelativeLayout>

@@ -83,27 +83,6 @@ public class SavedPasswordsActivity extends AppCompatActivity implements LoaderM
         // Initializing the loader
         getLoaderManager().initLoader(PASSWORD_LOADER, null, this);
 
-        // Setting OnItemClickedListener
-        // It navigates the user to Editor Activity.
-        passwordsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            /**
-             *
-             * @param adapterView
-             * @param view
-             * @param i - Position of the item clicked
-             * @param l - Id of the item clicked
-             */
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e(LOG_TAG, "list item is clicked!");
-
-                Uri uri = ContentUris.withAppendedId(PasswordsContract.PasswordsEntry.CONTENT_URI, l);
-                Intent intent = new Intent(SavedPasswordsActivity.this, EditorActivity.class);
-                intent.setData(uri);
-                startActivity(intent);
-            }
-        });
-
         // Setting onClickListener on FAB
         // It navigates the user to Editor Activity
         addNewAccountFAB.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +95,7 @@ public class SavedPasswordsActivity extends AppCompatActivity implements LoaderM
     }
 
     /**
-     * Implementing the functionality of Home button.
+     * Implement the functionality of Home button.
      * @param item
      * @return
      */
