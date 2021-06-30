@@ -25,8 +25,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import blue.project.passwordgenerator.data.PasswordsContract;
 
 public class SavedPasswordsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-    private final String LOG_TAG = SavedPasswordsActivity.class.getName();
-
     private ListView passwordsListView;
     private FloatingActionButton addNewAccountFAB;
     private PasswordCursorAdapter cursorAdapter;
@@ -85,12 +83,9 @@ public class SavedPasswordsActivity extends AppCompatActivity implements LoaderM
 
         // Setting onClickListener on FAB
         // It navigates the user to Editor Activity
-        addNewAccountFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SavedPasswordsActivity.this, EditorActivity.class);
-                startActivity(intent);
-            }
+        addNewAccountFAB.setOnClickListener(view -> {
+            Intent intent = new Intent(SavedPasswordsActivity.this, EditorActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -109,7 +104,7 @@ public class SavedPasswordsActivity extends AppCompatActivity implements LoaderM
                 startActivity(intent);
                 return true;
             case android.R.id.home:
-                // Redirecting user to Main Activity
+                // Redirect user to Main Activity
                 intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -118,6 +113,9 @@ public class SavedPasswordsActivity extends AppCompatActivity implements LoaderM
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Implement the functionality of back button
+     */
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);

@@ -118,6 +118,17 @@ public class EditorActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (pw != null && uri == null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private void initViews() {
         accountIdEditText = findViewById(R.id.editText_account_id);
         accountPasswordEditText = findViewById(R.id.editTextText_account_password);

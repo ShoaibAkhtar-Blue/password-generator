@@ -23,14 +23,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Setting title of this activity
+        // Set title of this activity
         this.setTitle("Login");
 
-        // Enabling Home button i.e. up arrow button
+        // Enable Home button i.e. up arrow button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Initialize views in the layout
         initViews();
 
+        // Set onClickListener on log in button
         loginButton.setOnClickListener(view -> {
             String userPin = loginPinEditText.getText().toString().trim();
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_pin), MODE_PRIVATE);
@@ -47,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Implementing the functionality of Home button
+     * Implement the functionality of Home button
      * @param item
      * @return
      */
@@ -62,8 +64,15 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
     /**
-     * Initializing views
+     * Initialize views
      */
     private void initViews() {
         loginPinEditText = findViewById(R.id.editText_login_pin);
