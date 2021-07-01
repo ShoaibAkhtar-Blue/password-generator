@@ -11,8 +11,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -157,30 +159,42 @@ public class MainActivity extends AppCompatActivity {
                 ps = getString(R.string.weak_password);
             } else if (length > 8 && length < 16) {
                 indicatorValue = 80;
-                indicatorColor = getColor(R.color.color_medium_password);
+                //indicatorColor = getColor(R.color.color_medium_password);
+                indicatorColor = ContextCompat.getColor(this, R.color.color_medium_password);
                 ps = getString(R.string.medium_password);
             } else if (length >= 16) {
                 indicatorValue = 100;
-                indicatorColor = getColor(R.color.color_strong_password);
+                //indicatorColor = getColor(R.color.color_strong_password);
+                indicatorColor = ContextCompat.getColor(this, R.color.color_strong_password);
                 ps = getString(R.string.strong_password);
             }
         } else {
             if (length <= 8) {
                 indicatorValue = 20;
-                indicatorColor = getColor(R.color.color_weak_password);
+                //indicatorColor = getColor(R.color.color_weak_password);
+                indicatorColor = ContextCompat.getColor(this, R.color.color_weak_password);
                 ps = getString(R.string.weak_password);
             } else if (length > 8 && length < 16) {
                 indicatorValue = 60;
-                indicatorColor = getColor(R.color.color_medium_password);
+                //indicatorColor = getColor(R.color.color_medium_password);
+                indicatorColor = ContextCompat.getColor(this, R.color.color_medium_password);
                 ps = getString(R.string.medium_password);
             } else if (length >= 16) {
                 indicatorValue = 100;
-                indicatorColor = getColor(R.color.color_strong_password);
+                //indicatorColor = getColor(R.color.color_strong_password);
+                indicatorColor = ContextCompat.getColor(this, R.color.color_strong_password);
                 ps = getString(R.string.strong_password);
             }
         }
+        // Set strength value to progress bar
         progressBarPS.setProgress(indicatorValue);
-        //progressBarPS.getCurrentDrawable().setColorFilter(indicatorColor, PorterDuff.Mode.SRC_IN);
+
+        // Set color of progress bar according to password strength
+        Drawable drawable = progressBarPS.getProgressDrawable();
+        drawable.setColorFilter(indicatorColor, PorterDuff.Mode.SRC_IN);
+        progressBarPS.setProgressDrawable(drawable);
+
+        // Set password strength and color to TextView
         passwordStrengthTextView.setText(ps);
         passwordStrengthTextView.setTextColor(indicatorColor);
     }
